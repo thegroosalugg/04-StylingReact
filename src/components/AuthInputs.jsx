@@ -16,8 +16,8 @@ const Label = styled.label`
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6b7280;
-`;
+  color: ${({invalid}) => invalid ? '#f87171': '#6b7280'};
+`; // dynamically sets color by passing a prop as a function
 
 const Input = styled.input`
   width: 100%;
@@ -54,12 +54,11 @@ export default function AuthInputs() {
     <div id="auth-inputs">
       <ControlsDiv>
         <p>
-          <Label className={`label ${emailNotValid ? "invalid" : ""}`}>
+          <Label invalid={emailNotValid}>
             Email
           </Label>
           <Input
             type="email"
-            className={emailNotValid ? "invalid" : undefined}
             onChange={(event) => handleInputChange("email", event.target.value)}
           />
         </p>
